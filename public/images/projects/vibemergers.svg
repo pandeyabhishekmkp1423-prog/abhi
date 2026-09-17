@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="vmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="100%" stop-color="#EFF6FF" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#071327" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#vmGrad)" />
+
+  <g filter="url(#shadow)" transform="translate(60, 45)">
+    <rect width="680" height="410" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Browser Bar -->
+    <rect width="680" height="42" rx="10" fill="#F8FAFC" />
+    <path d="M 0 42 L 680 42" stroke="#E2E8F0" stroke-width="1.5" />
+    <circle cx="24" cy="21" r="5" fill="#EF4444" opacity="0.75" />
+    <circle cx="40" cy="21" r="5" fill="#F59E0B" opacity="0.75" />
+    <circle cx="56" cy="21" r="5" fill="#10B981" opacity="0.75" />
+    <rect x="84" y="11" width="220" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0" />
+    <text x="96" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">vibemergers.com/solutions</text>
+
+    <!-- Header / Nav -->
+    <rect x="0" y="42" width="680" height="48" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <circle cx="35" cy="66" r="8" fill="#2563EB" />
+    <text x="50" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#071327">Vibemergers</text>
+    <text x="320" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">Engineering</text>
+    <text x="400" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">Cloud Infrastructure</text>
+    <text x="510" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">Case Studies</text>
+    <rect x="590" y="54" width="70" height="24" rx="4" fill="#2563EB" />
+    <text x="605" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">Contact</text>
+
+    <!-- Hero Content -->
+    <g transform="translate(40, 115)">
+      <rect x="0" y="0" width="130" height="20" rx="10" fill="#EFF6FF" stroke="#BFDBFE" />
+      <text x="12" y="13" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#2563EB">ENTERPRISE IT SOLUTIONS</text>
+      
+      <text x="0" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#071327">Digital Infrastructure & Custom Software</text>
+      <text x="0" y="68" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">Architecting scalable web applications and enterprise integrations tailored for organizational efficiency.</text>
+      
+      <!-- Action Buttons -->
+      <rect x="0" y="90" width="125" height="30" rx="4" fill="#2563EB" />
+      <text x="22" y="109" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Our Services</text>
+
+      <rect x="135" y="90" width="115" height="30" rx="4" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="156" y="109" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#071327">Explore Work</text>
+
+      <!-- 3 Feature Cards -->
+      <g transform="translate(0, 140)">
+        <rect x="0" y="0" width="190" height="120" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="15" y="15" width="28" height="28" rx="6" fill="#EFF6FF" stroke="#BFDBFE" />
+        <path d="M 23 29 L 35 29 M 29 23 L 29 35" stroke="#2563EB" stroke-width="2" stroke-linecap="round" />
+        <text x="15" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">Full-Stack Engineering</text>
+        <text x="15" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Custom web applications built with TypeScript, Next.js, and Node.js.</text>
+
+        <rect x="205" y="0" width="190" height="120" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="220" y="15" width="28" height="28" rx="6" fill="#EFF6FF" stroke="#BFDBFE" />
+        <circle cx="234" cy="29" r="7" stroke="#2563EB" stroke-width="2" fill="none" />
+        <text x="220" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">Cloud Integration</text>
+        <text x="220" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Reliable database synchronization and secure third-party API connectivity.</text>
+
+        <rect x="410" y="0" width="190" height="120" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="425" y="15" width="28" height="28" rx="6" fill="#EFF6FF" stroke="#BFDBFE" />
+        <path d="M 433 34 L 439 24 L 445 34" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        <text x="425" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">SEO & Performance</text>
+        <text x="425" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Technical SEO compliance, fast page loads, and mobile accessibility.</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDFBF7" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#071327" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#gmGrad)" />
+
+  <g filter="url(#shadow)" transform="translate(60, 45)">
+    <rect width="680" height="410" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Browser Bar -->
+    <rect width="680" height="42" rx="10" fill="#F8FAFC" />
+    <path d="M 0 42 L 680 42" stroke="#E2E8F0" stroke-width="1.5" />
+    <circle cx="24" cy="21" r="5" fill="#EF4444" opacity="0.75" />
+    <circle cx="40" cy="21" r="5" fill="#F59E0B" opacity="0.75" />
+    <circle cx="56" cy="21" r="5" fill="#10B981" opacity="0.75" />
+    <rect x="84" y="11" width="220" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0" />
+    <text x="96" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">gaonmitra.in/marketplace</text>
+
+    <!-- Top Navigation -->
+    <rect x="0" y="42" width="680" height="46" fill="#071327" />
+    <text x="25" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF">GaonMitra · गाँवमित्र</text>
+    <text x="350" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8">सेवाएं (Services)</text>
+    <text x="445" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8">कृषि उपकरण (Tools)</text>
+    <rect x="580" y="53" width="75" height="24" rx="4" fill="#16A34A" />
+    <text x="592" y="68" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#FFFFFF">हिंदी सक्रिय</text>
+
+    <!-- Sub-header Category Bar -->
+    <rect x="0" y="88" width="680" height="36" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+    <text x="30" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#2563EB">सभी श्रेणियां (All Categories)</text>
+    <text x="200" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">ट्रैक्टर व हल (Tractors)</text>
+    <text x="330" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">मिस्त्री व कारीगर (Masons)</text>
+    <text x="470" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">बिजली व सोलर (Solar)</text>
+
+    <!-- Directory Listings Grid -->
+    <g transform="translate(25, 140)">
+      <!-- Listing 1 -->
+      <g>
+        <rect x="0" y="0" width="200" height="245" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="15" y="15" width="170" height="85" rx="4" fill="#EFF6FF" stroke="#BFDBFE" />
+        <circle cx="100" cy="55" r="22" fill="#2563EB" opacity="0.15" />
+        <text x="75" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#2563EB">🚜 किराया</text>
+
+        <text x="15" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">महिंद्रा 575 ट्रैक्टर किराया</text>
+        <text x="15" y="142" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Mahindra Tractor Rental · रोटावेटर सहित</text>
+        <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#16A34A" font-weight="600">उपलब्ध: रामेश्वर सिंह (ग्राम पिपरी)</text>
+        <text x="15" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">₹600 / घंटा</text>
+        
+        <rect x="15" y="202" width="170" height="28" rx="4" fill="#16A34A" />
+        <text x="50" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">📞 सीधे बात करें (Call)</text>
+      </g>
+
+      <!-- Listing 2 -->
+      <g transform="translate(215, 0)">
+        <rect x="0" y="0" width="200" height="245" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="15" y="15" width="170" height="85" rx="4" fill="#FEF3C7" stroke="#FDE68A" />
+        <circle cx="100" cy="55" r="22" fill="#D97706" opacity="0.15" />
+        <text x="75" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#D97706">⚡ इलेक्ट्रीशियन</text>
+
+        <text x="15" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">मोटर व ट्यूबवेल मरम्मत</text>
+        <text x="15" y="142" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Submersible & Wiring Service</text>
+        <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#16A34A" font-weight="600">उपलब्ध: दिनेश कुमार (सलोन ब्लॉक)</text>
+        <text x="15" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">दर: काम अनुसार</text>
+
+        <rect x="15" y="202" width="170" height="28" rx="4" fill="#16A34A" />
+        <text x="50" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">📞 सीधे बात करें (Call)</text>
+      </g>
+
+      <!-- Listing 3 -->
+      <g transform="translate(430, 0)">
+        <rect x="0" y="0" width="200" height="245" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="15" y="15" width="170" height="85" rx="4" fill="#DCFCE7" stroke="#BBF7D0" />
+        <circle cx="100" cy="55" r="22" fill="#16A34A" opacity="0.15" />
+        <text x="75" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#16A34A">🌾 जैविक खाद</text>
+
+        <text x="15" y="125" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">शुद्ध वर्मीकम्पोस्ट खाद</text>
+        <text x="15" y="142" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Organic Vermicompost 50kg Bags</text>
+        <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#16A34A" font-weight="600">उपलब्ध: किसान उत्पादक समूह</text>
+        <text x="15" y="185" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#071327">₹350 / बोरी</text>
+
+        <rect x="15" y="202" width="170" height="28" rx="4" fill="#16A34A" />
+        <text x="50" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">📞 सीधे बात करें (Call)</text>
+      </g>
+    </g>
+  </g>
+</svg>

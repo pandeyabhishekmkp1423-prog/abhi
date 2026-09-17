@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="scentBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDFBF7" />
+      <stop offset="100%" stop-color="#F3F4F6" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#071327" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#scentBg)" />
+
+  <g filter="url(#shadow)" transform="translate(60, 45)">
+    <rect width="680" height="410" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Browser Bar -->
+    <rect width="680" height="42" rx="10" fill="#F8FAFC" />
+    <path d="M 0 42 L 680 42" stroke="#E2E8F0" stroke-width="1.5" />
+    <circle cx="24" cy="21" r="5" fill="#EF4444" opacity="0.75" />
+    <circle cx="40" cy="21" r="5" fill="#F59E0B" opacity="0.75" />
+    <circle cx="56" cy="21" r="5" fill="#10B981" opacity="0.75" />
+    <rect x="84" y="11" width="220" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0" />
+    <text x="96" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">scentrun.luxury/fragrances/woody</text>
+
+    <!-- Header / Nav -->
+    <rect x="0" y="42" width="680" height="46" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="30" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#071327">SCENTRUN</text>
+    <text x="280" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#2563EB" font-weight="600">Woody Notes</text>
+    <text x="365" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">Oriental</text>
+    <text x="430" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">Floral</text>
+    <text x="485" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">Fresh Citrus</text>
+    <rect x="580" y="53" width="75" height="24" rx="12" fill="#071327" />
+    <text x="597" y="68" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="500" fill="#FFFFFF">Cart (2)</text>
+
+    <!-- Faceted Filter Sidebar -->
+    <rect x="0" y="88" width="160" height="322" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+    <text x="20" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#071327">OLFACTORY PYRAMID</text>
+    
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#475569">Top Notes</text>
+    <text x="30" y="158" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#2563EB">✓ Calabrian Bergamot</text>
+    <text x="30" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Cardamom</text>
+
+    <text x="20" y="202" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#475569">Heart Notes</text>
+    <text x="30" y="220" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#2563EB">✓ Atlas Cedarwood</text>
+    <text x="30" y="236" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Nutmeg</text>
+
+    <text x="20" y="264" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#475569">Concentration</text>
+    <rect x="20" y="278" width="60" height="18" rx="3" fill="#EFF6FF" stroke="#BFDBFE" />
+    <text x="26" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="8" fill="#2563EB">Eau De Parfum</text>
+
+    <!-- Product Grid -->
+    <g transform="translate(180, 105)">
+      <!-- Product 1 -->
+      <g>
+        <rect x="0" y="0" width="150" height="200" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <!-- Bottle silhouette -->
+        <rect x="55" y="30" width="40" height="75" rx="6" fill="#071327" opacity="0.9" />
+        <rect x="65" y="20" width="20" height="10" fill="#F59E0B" />
+        <rect x="60" y="55" width="30" height="30" fill="#FFFFFF" opacity="0.15" />
+        
+        <text x="14" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#071327">Noir Vetiver 100ml</text>
+        <text x="14" y="146" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Cedar · Haitian Vetiver</text>
+        <text x="14" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#2563EB">₹6,800</text>
+        <rect x="80" y="156" width="58" height="22" rx="4" fill="#071327" />
+        <text x="92" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="8" fill="#FFFFFF">Add to Bag</text>
+      </g>
+
+      <!-- Product 2 -->
+      <g transform="translate(160, 0)">
+        <rect x="0" y="0" width="150" height="200" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="55" y="30" width="40" height="75" rx="6" fill="#1E293B" opacity="0.9" />
+        <rect x="65" y="20" width="20" height="10" fill="#D97706" />
+        <rect x="60" y="55" width="30" height="30" fill="#FFFFFF" opacity="0.15" />
+
+        <text x="14" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#071327">Santale Imperial</text>
+        <text x="14" y="146" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Sandalwood · Cardamom</text>
+        <text x="14" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#2563EB">₹8,400</text>
+        <rect x="80" y="156" width="58" height="22" rx="4" fill="#071327" />
+        <text x="92" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="8" fill="#FFFFFF">Add to Bag</text>
+      </g>
+
+      <!-- Product 3 -->
+      <g transform="translate(320, 0)">
+        <rect x="0" y="0" width="150" height="200" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+        <rect x="55" y="30" width="40" height="75" rx="6" fill="#334155" opacity="0.9" />
+        <rect x="65" y="20" width="20" height="10" fill="#FBBF24" />
+        <rect x="60" y="55" width="30" height="30" fill="#FFFFFF" opacity="0.15" />
+
+        <text x="14" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#071327">Oud Éthéré 50ml</text>
+        <text x="14" y="146" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Assam Oud · Amber</text>
+        <text x="14" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#2563EB">₹12,200</text>
+        <rect x="80" y="156" width="58" height="22" rx="4" fill="#071327" />
+        <text x="92" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="8" fill="#FFFFFF">Add to Bag</text>
+      </g>
+    </g>
+  </g>
+</svg>

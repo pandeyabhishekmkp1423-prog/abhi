@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="rrsimtBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F5F9" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#071327" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#rrsimtBg)" />
+
+  <g filter="url(#shadow)" transform="translate(60, 45)">
+    <rect width="680" height="410" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Browser Bar -->
+    <rect width="680" height="42" rx="10" fill="#F8FAFC" />
+    <path d="M 0 42 L 680 42" stroke="#E2E8F0" stroke-width="1.5" />
+    <circle cx="24" cy="21" r="5" fill="#EF4444" opacity="0.75" />
+    <circle cx="40" cy="21" r="5" fill="#F59E0B" opacity="0.75" />
+    <circle cx="56" cy="21" r="5" fill="#10B981" opacity="0.75" />
+    <rect x="84" y="11" width="230" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0" />
+    <text x="96" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748B">rrsimt.ac.in/campushub/portal</text>
+
+    <!-- Header Navbar -->
+    <rect x="0" y="42" width="680" height="46" fill="#071327" />
+    <rect x="25" y="55" width="20" height="20" rx="4" fill="#2563EB" />
+    <text x="55" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">RRSIMT CampusHub</text>
+    <text x="360" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8">Departments</text>
+    <text x="440" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8">Notices</text>
+    <text x="500" y="69" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94A3B8">Admissions</text>
+    <rect x="585" y="53" width="75" height="24" rx="4" fill="#2563EB" />
+    <text x="598" y="68" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF">Student ERP</text>
+
+    <!-- Hero Banner Simulation -->
+    <rect x="25" y="105" width="630" height="90" rx="6" fill="#EFF6FF" stroke="#BFDBFE" />
+    <text x="45" y="135" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#071327">Academic Session Circulars & Department Directory</text>
+    <text x="45" y="155" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#2563EB">Semester examination schedules and institutional announcements updated daily.</text>
+    <rect x="45" y="168" width="110" height="18" rx="3" fill="#2563EB" />
+    <text x="55" y="180" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#FFFFFF">Latest Circulars</text>
+
+    <!-- Notice Board Cards Grid -->
+    <g transform="translate(25, 210)">
+      <!-- Card 1 -->
+      <rect x="0" y="0" width="200" height="175" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+      <rect x="12" y="12" width="65" height="16" rx="3" fill="#DBEAFE" />
+      <text x="18" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#1D4ED8">Examination</text>
+      <text x="12" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#071327">B.Tech Odd Sem Exam Schedule</text>
+      <text x="12" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Branch: CSE, ME, Civil & ECE</text>
+      <rect x="12" y="80" width="176" height="1" fill="#E2E8F0" />
+      <text x="12" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Uploaded: Exam Controller Cell</text>
+      <text x="12" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Attached: PDF (1.4 MB)</text>
+      <rect x="12" y="138" width="176" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="58" y="153" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="#071327">Download Circular</text>
+
+      <!-- Card 2 -->
+      <rect x="215" y="0" width="200" height="175" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+      <rect x="227" y="12" width="70" height="16" rx="3" fill="#DCFCE7" />
+      <text x="233" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#15803D">Admissions</text>
+      <text x="227" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#071327">Management Quota Registration</text>
+      <text x="227" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Eligibility: JEE / State Entrance</text>
+      <rect x="227" y="80" width="176" height="1" fill="#E2E8F0" />
+      <text x="227" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Admissions Cell 2024</text>
+      <text x="227" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Online Inquiry Portal Open</text>
+      <rect x="227" y="138" width="176" height="24" rx="4" fill="#2563EB" />
+      <text x="272" y="153" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="#FFFFFF">Apply Online</text>
+
+      <!-- Card 3 -->
+      <rect x="430" y="0" width="200" height="175" rx="6" fill="#F8FAFC" stroke="#E2E8F0" />
+      <rect x="442" y="12" width="60" height="16" rx="3" fill="#FEF3C7" />
+      <text x="448" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#B45309">Training</text>
+      <text x="442" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#071327">Campus Placement Drive 2024</text>
+      <text x="442" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Recruiters: IT & Core Engineering</text>
+      <rect x="442" y="80" width="176" height="1" fill="#E2E8F0" />
+      <text x="442" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Corporate Relations Cell</text>
+      <text x="442" y="118" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">Eligible: Pre-Final & Final Year</text>
+      <rect x="442" y="138" width="176" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" />
+      <text x="485" y="153" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="500" fill="#071327">View Details</text>
+    </g>
+  </g>
+</svg>
