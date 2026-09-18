@@ -134,7 +134,7 @@ export const Navbar: React.FC = () => {
         <div
           className={`pointer-events-auto relative flex items-center justify-between w-full transition-all duration-300 text-white select-none ${
             isScrolled
-              ? "max-w-4xl px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neutral-950/85 backdrop-blur-2xl border border-white/15 shadow-[0_16px_48px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.15)]"
+              ? "max-w-4xl px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-neutral-950/90 backdrop-blur-2xl border border-white/18 shadow-[0_16px_48px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.15)]"
               : "w-full bg-transparent border-transparent shadow-none"
           }`}
         >
@@ -148,15 +148,15 @@ export const Navbar: React.FC = () => {
               <div
                 className={`relative transition-all duration-300 flex items-center ${
                   isScrolled
-                    ? "h-7 sm:h-7.5 w-26 sm:w-30"
-                    : "h-10 sm:h-12 w-36 sm:w-44"
+                    ? "h-[38px] sm:h-[42px] w-[88px] sm:w-[98px]"
+                    : "h-[56px] sm:h-[68px] lg:h-[76px] w-[130px] sm:w-[155px] lg:w-[175px]"
                 }`}
               >
                 <Image
                   src="/images/signature-white.png"
                   alt="Abhishek Pandey"
                   fill
-                  className="object-contain object-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_2px_16px_rgba(255,255,255,0.6)] transition-all duration-200"
+                  className="object-contain object-left drop-shadow-[0_2px_14px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_2px_20px_rgba(255,255,255,0.7)] transition-all duration-200"
                   priority
                 />
               </div>
