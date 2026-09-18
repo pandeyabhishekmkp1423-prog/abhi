@@ -2,149 +2,138 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "../layout/Container";
-import { ArrowDownRight } from "lucide-react";
+import { ArrowDownRight, Layers, Database, ShoppingBag, Cloud, ShieldCheck, Zap } from "lucide-react";
 
 export const Services: React.FC = () => {
   const capabilities = [
     {
       id: "web-apps",
-      icon: (
-        <svg className="w-8 h-8 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-          <line x1="8" y1="21" x2="16" y2="21"/>
-          <line x1="12" y1="17" x2="12" y2="21"/>
-          <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
-          <path d="M16 11l-3-3-4 4"/>
-        </svg>
-      ),
+      icon: <Layers className="w-6 h-6 text-indigo-500 dark:text-indigo-400" />,
       title: "Enterprise Web Apps",
-      description: "High-performance React & Next.js applications with reactive UX, state-of-the-art accessibility, and microsecond responsiveness.",
+      badge: "Sub-100ms Latency",
+      description: "High-performance React 19 & Next.js applications engineered with streaming SSR, reactive state management, and microsecond responsiveness.",
+      features: ["Next.js App Router", "Server Actions & Streaming", "WCAG 2.1 AAA Accessibility"],
       href: "/#work"
     },
     {
       id: "business-systems",
-      icon: (
-        <svg className="w-8 h-8 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          <path d="M12 22v-4.23"/>
-        </svg>
-      ),
+      icon: <Database className="w-6 h-6 text-violet-500 dark:text-violet-400" />,
       title: "ERP & LMS Portals",
-      description: "Full-scale administrative suites with multi-role permissions, student registers, automated fees, and analytics dashboards.",
+      badge: "Multi-Role RBAC",
+      description: "Full-scale institutional suites managing multi-tier fee reconciliation, attendance logging, dynamic circulars, and comprehensive dashboards.",
+      features: ["Granular Permission Systems", "ACID Financial Ledgers", "Automated Student Workflows"],
       href: "/#work"
     },
     {
       id: "ecommerce",
-      icon: (
-        <svg className="w-8 h-8 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="9"/>
-          <path d="M10 9a2 2 0 1 1 4 0v3"/>
-          <path d="M8 17h8"/>
-          <path d="M12 12v5"/>
-        </svg>
-      ),
+      icon: <ShoppingBag className="w-6 h-6 text-cyan-500 dark:text-cyan-400" />,
       title: "Custom E-Commerce",
-      description: "Tailored multi-currency storefronts with lightning-fast catalog search, Razorpay integrations, and automated inventory sync.",
+      badge: "Instant Filtering",
+      description: "Tailored multi-currency retail storefronts with olfactory note taxonomy filters, client-server cart hydration, and seamless payment gateways.",
+      features: ["Faceted URL Search Engine", "Razorpay / Stripe Gateways", "Cart State Synchronization"],
       href: "/#work"
     },
     {
       id: "cloud-apis",
-      icon: (
-        <svg className="w-8 h-8 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
-          <path d="M12 13v6"/>
-          <path d="M9 16l3 3 3-3"/>
-        </svg>
-      ),
+      icon: <Cloud className="w-6 h-6 text-emerald-500 dark:text-emerald-400" />,
       title: "Cloud & API Architecture",
-      description: "Resilient backend systems, PostgreSQL/MongoDB schemas, REST & GraphQL endpoints, and zero-downtime deployment pipelines.",
+      badge: "Zero-Downtime CD",
+      description: "Resilient distributed backend systems, normalized PostgreSQL/MySQL schemas, secure REST endpoints, and automated deployment pipelines.",
+      features: ["Strict Relational Normalization", "Docker & Edge Deployment", "Rate-Limiting & Security"],
       href: "/#work"
     }
   ];
 
   return (
-    <section id="services" className="py-24 lg:py-32 bg-white relative overflow-hidden">
-      {/* Decorative Radial Background Watermark (Matching reference image) */}
+    <section id="services" className="py-20 lg:py-28 bg-white dark:bg-[#07090E] relative overflow-hidden transition-colors border-t border-slate-200/80 dark:border-white/10">
+      {/* Decorative ambient radial glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none -z-10 opacity-35 flex items-center justify-center"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
-      >
-        <svg className="w-full h-full text-violet-200/50 animate-spin-very-slow" viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
-          <circle cx="100" cy="100" r="70" stroke="currentColor" strokeWidth="1" />
-          <circle cx="100" cy="100" r="50" stroke="currentColor" strokeWidth="1" strokeDasharray="6 6" />
-          <circle cx="100" cy="100" r="30" stroke="currentColor" strokeWidth="1" />
-          <path d="M100 0v200M0 100h200" stroke="currentColor" strokeWidth="0.75" strokeDasharray="3 3" />
-        </svg>
-      </div>
+      />
 
       <Container>
-        {/* Centered Heading Section (Direct reference replica) */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-50 border border-violet-200/60 text-violet-600 text-xs font-bold tracking-widest uppercase">
-            WHAT WE DO
+        {/* Centered Heading Section */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3.5">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-xs font-mono font-bold tracking-widest uppercase">
+            <Zap className="w-3.5 h-3.5" />
+            <span>CORE CAPABILITIES &amp; SYSTEMS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[#0B0F19] tracking-tight leading-[1.2]">
-            Bring your imagination to the screen <br className="hidden sm:block" />
-            with{" "}
-            <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              Production Systems
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Engineered systems with <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-500 dark:from-indigo-400 dark:via-violet-300 dark:to-cyan-400 bg-clip-text text-transparent">
+              dependable architecture.
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed max-w-2xl mx-auto">
-            Create web systems engineered with surgical precision. Transform complex business logic into high-velocity digital experiences with dependable performance.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
+            Translating complex enterprise requirements into high-velocity digital experiences with rigorous type safety, relational normalization, and sub-second execution.
           </p>
 
-          {/* Handwritten Signature */}
-          <div className="pt-4 pb-2 flex flex-col items-center justify-center">
-            <div className="relative w-64 sm:w-80 h-24 sm:h-28 hover:scale-105 transition-transform duration-300">
+          {/* Developer Bio Seal & Signature */}
+          <div className="pt-2 flex flex-col items-center justify-center">
+            <div className="relative w-56 sm:w-64 h-16 sm:h-20 hover:scale-105 transition-transform duration-300">
               <Image
                 src="/images/signature-transparent.png"
                 alt="Signature of Abhishek Pandey"
                 fill
-                className="object-contain"
+                className="object-contain dark:invert dark:brightness-200 transition-all"
                 priority
               />
             </div>
-            <span className="text-[11px] uppercase font-bold tracking-wider text-slate-400 mt-1">
+            <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 dark:text-slate-500">
               Full-Stack Architect &amp; Engineering Lead
             </span>
           </div>
         </div>
 
-        {/* 4 Feature Cards (Direct reference replica) */}
+        {/* 4 Feature Bento Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {capabilities.map((item) => (
             <Link
               key={item.id}
               href={item.href}
-              className="group relative bg-white rounded-2xl sm:rounded-3xl p-7 border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(139,92,246,0.12)] hover:border-violet-300 transition-all duration-300 flex flex-col justify-between"
+              className="group relative bg-slate-50/70 dark:bg-[#0E121B] rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-slate-200/80 dark:border-white/10 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-400 dark:hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between"
             >
-              {/* Top: Icon */}
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-violet-50/90 border border-violet-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-violet-100 transition-all duration-300 mb-6">
-                  {item.icon}
+                {/* Icon & Micro Badge */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/20 group-hover:border-indigo-300 transition-all duration-300 shadow-2xs">
+                    {item.icon}
+                  </div>
+                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/70 dark:border-indigo-500/30 text-indigo-600 dark:text-indigo-400">
+                    {item.badge}
+                  </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="font-heading font-bold text-lg text-[#0B0F19] group-hover:text-violet-600 transition-colors mb-2.5">
+                <h3 className="font-heading font-bold text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-2.5">
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
                   {item.description}
                 </p>
+
+                {/* Feature checklist */}
+                <ul className="space-y-1.5 pt-2 border-t border-slate-200/60 dark:border-white/5">
+                  {item.features.map((feat) => (
+                    <li key={feat} className="text-[11px] font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                      <span className="w-1 h-1 rounded-full bg-indigo-500" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Bottom: Circular arrow button */}
-              <div className="mt-8 pt-4 border-t border-slate-100/80 flex items-center justify-between">
-                <span className="text-[11px] font-medium text-slate-400 group-hover:text-violet-600 transition-colors">
+              {/* Bottom Arrow Indicator */}
+              <div className="mt-6 pt-3 border-t border-slate-200/60 dark:border-white/5 flex items-center justify-between">
+                <span className="text-[11px] font-mono text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                   Explore stack
                 </span>
-                <div className="w-9 h-9 rounded-full bg-slate-50 border border-slate-200/70 flex items-center justify-center text-slate-500 group-hover:bg-violet-600 group-hover:border-violet-600 group-hover:text-white transition-all duration-300 group-hover:rotate-45">
+                <div className="w-8 h-8 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 group-hover:bg-indigo-600 group-hover:border-indigo-600 group-hover:text-white transition-all duration-300 group-hover:rotate-45 shadow-2xs">
                   <ArrowDownRight className="w-4 h-4" />
                 </div>
               </div>

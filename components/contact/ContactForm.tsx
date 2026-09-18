@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
-import { Button } from "../ui/Button";
 
 interface FormData {
   name: string;
@@ -10,7 +9,7 @@ interface FormData {
   organization: string;
   projectType: string;
   message: string;
-  honeypot: string; // Anti-spam honeypot
+  honeypot: string;
 }
 
 interface FormErrors {
@@ -36,9 +35,9 @@ export const ContactForm: React.FC = () => {
 
   const projectTypes = [
     "Web Application",
-    "ERP / CRM / LMS System",
+    "ERP / CRM / LMS",
     "E-Commerce Storefront",
-    "API & Database Integration",
+    "API & Cloud Architecture",
     "Technical Consultation"
   ];
 
@@ -73,12 +72,11 @@ export const ContactForm: React.FC = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Clear error on edit
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -87,9 +85,7 @@ export const ContactForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Honeypot bot protection
     if (formData.honeypot) {
-      // Silently pretend success to fool bots
       setStatus("success");
       setServerMessage("Your inquiry has been submitted.");
       return;
@@ -112,7 +108,7 @@ export const ContactForm: React.FC = () => {
       if (response.ok && result.success) {
         setStatus("success");
         setServerMessage(
-          result.message || "Thank you. Your inquiry has been received. I will review your requirements and respond shortly."
+          result.message || "Thank you. Your project specifications have been received. I will review and reply within 24-48 business hours."
         );
         setFormData({
           name: "",
@@ -124,40 +120,38 @@ export const ContactForm: React.FC = () => {
         });
       } else {
         setStatus("error");
-        setServerMessage(result.error || "An error occurred while submitting your message. Please try again or email directly.");
+        setServerMessage(result.error || "An error occurred while submitting your message. Please email directly to contact@abhishekpandey.dev.");
       }
     } catch {
       setStatus("error");
-      setServerMessage("Network error. Please try again or send an email directly to contact@abhishekpandey.dev.");
+      setServerMessage("Network error. Please email directly to contact@abhishekpandey.dev.");
     }
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-8 lg:p-10 shadow-xs">
+    <div className="bg-white dark:bg-[#0E121B] rounded-2xl border border-slate-200/80 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-xl">
       {status === "success" ? (
         <div className="py-12 flex flex-col items-center text-center">
-          <div className="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center mb-4">
-            <CheckCircle2 className="w-7 h-7" />
+          <div className="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/20">
+            <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h3 className="text-xl font-heading font-bold text-[#071327]">
-            Inquiry Received
+          <h3 className="text-xl font-heading font-bold text-slate-900 dark:text-white">
+            Project Specifications Received
           </h3>
-          <p className="mt-2 text-sm text-[#64748B] max-w-md leading-relaxed">
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
             {serverMessage}
           </p>
-          <Button
+          <button
             type="button"
-            variant="outline"
-            size="sm"
-            className="mt-6"
+            className="mt-6 px-4 py-2 rounded-xl bg-slate-100 dark:bg-white/5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors"
             onClick={() => setStatus("idle")}
           >
-            Send Another Message
-          </Button>
+            Submit Another Specification
+          </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} noValidate className="space-y-5">
-          {/* Hidden honeypot anti-spam trap */}
+          {/* Anti-spam honeypot */}
           <div className="hidden" aria-hidden="true">
             <label htmlFor="honeypot">Leave this blank</label>
             <input
@@ -173,22 +167,48 @@ export const ContactForm: React.FC = () => {
 
           {status === "error" && (
             <div
-              className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2"
+              className="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-500/30 text-xs text-rose-700 dark:text-rose-400 flex items-start gap-2"
               role="alert"
             >
-              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{serverMessage}</span>
             </div>
           )}
+
+          {/* Project Type Selector Pills */}
+          <div>
+            <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+              Select Architecture Requirement
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {projectTypes.map((type) => {
+                const isSelected = formData.projectType === type;
+                return (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => setFormData((prev) => ({ ...prev, projectType: type }))}
+                    className={`text-xs px-3 py-1.5 rounded-xl font-medium font-mono transition-all ${
+                      isSelected
+                        ? "bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 font-bold"
+                        : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200/80 dark:border-white/5"
+                    }`}
+                  >
+                    {type}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
           {/* Name & Email Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label
                 htmlFor="name"
-                className="block text-xs font-semibold text-[#071327] uppercase tracking-wider mb-1.5"
+                className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5"
               >
-                Your Name <span className="text-[#2563EB]">*</span>
+                Your Name <span className="text-indigo-500">*</span>
               </label>
               <input
                 type="text"
@@ -199,13 +219,12 @@ export const ContactForm: React.FC = () => {
                 onChange={handleChange}
                 placeholder="e.g. Rahul Sharma"
                 aria-invalid={!!errors.name}
-                aria-describedby={errors.name ? "name-error" : undefined}
-                className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#071327] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-[#2563EB] ${
-                  errors.name ? "border-red-400 bg-red-50/20" : "border-[#E2E8F0]"
+                className={`w-full px-3.5 py-2.5 rounded-xl border text-sm text-slate-900 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                  errors.name ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-white/10"
                 }`}
               />
               {errors.name && (
-                <p id="name-error" className="mt-1 text-xs text-red-600">
+                <p className="mt-1 text-xs text-rose-500 font-mono">
                   {errors.name}
                 </p>
               )}
@@ -214,9 +233,9 @@ export const ContactForm: React.FC = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-xs font-semibold text-[#071327] uppercase tracking-wider mb-1.5"
+                className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5"
               >
-                Email Address <span className="text-[#2563EB]">*</span>
+                Work Email <span className="text-indigo-500">*</span>
               </label>
               <input
                 type="email"
@@ -225,71 +244,46 @@ export const ContactForm: React.FC = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="you@company.com"
+                placeholder="e.g. rahul@company.com"
                 aria-invalid={!!errors.email}
-                aria-describedby={errors.email ? "email-error" : undefined}
-                className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#071327] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-[#2563EB] ${
-                  errors.email ? "border-red-400 bg-red-50/20" : "border-[#E2E8F0]"
+                className={`w-full px-3.5 py-2.5 rounded-xl border text-sm text-slate-900 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                  errors.email ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-white/10"
                 }`}
               />
               {errors.email && (
-                <p id="email-error" className="mt-1 text-xs text-red-600">
+                <p className="mt-1 text-xs text-rose-500 font-mono">
                   {errors.email}
                 </p>
               )}
             </div>
           </div>
 
-          {/* Organization & Project Type Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label
-                htmlFor="organization"
-                className="block text-xs font-semibold text-[#071327] uppercase tracking-wider mb-1.5"
-              >
-                Company / Organization <span className="text-slate-400 font-normal">(Optional)</span>
-              </label>
-              <input
-                type="text"
-                id="organization"
-                name="organization"
-                value={formData.organization}
-                onChange={handleChange}
-                placeholder="Company or institution name"
-                className="w-full px-3.5 py-2.5 rounded-lg border border-[#E2E8F0] text-sm text-[#071327] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-[#2563EB]"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="projectType"
-                className="block text-xs font-semibold text-[#071327] uppercase tracking-wider mb-1.5"
-              >
-                Project Type <span className="text-[#2563EB]">*</span>
-              </label>
-              <select
-                id="projectType"
-                name="projectType"
-                value={formData.projectType}
-                onChange={handleChange}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-[#E2E8F0] text-sm text-[#071327] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-[#2563EB]"
-              >
-                {projectTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
+          {/* Organization */}
+          <div>
+            <label
+              htmlFor="organization"
+              className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5"
+            >
+              Organization / Company (Optional)
+            </label>
+            <input
+              type="text"
+              id="organization"
+              name="organization"
+              value={formData.organization}
+              onChange={handleChange}
+              placeholder="e.g. Acme Health / Stealth Startup"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-sm text-slate-900 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
           </div>
 
-          {/* Message Field */}
+          {/* Message */}
           <div>
             <label
               htmlFor="message"
-              className="block text-xs font-semibold text-[#071327] uppercase tracking-wider mb-1.5"
+              className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5"
             >
-              Project Overview <span className="text-[#2563EB]">*</span>
+              Technical Requirements &amp; Scope <span className="text-indigo-500">*</span>
             </label>
             <textarea
               id="message"
@@ -298,46 +292,37 @@ export const ContactForm: React.FC = () => {
               rows={4}
               value={formData.message}
               onChange={handleChange}
-              placeholder="Outline your operational requirements, target timeline, or existing technical setup..."
+              placeholder="Outline your application scope, expected user volume, desired timeline, or architectural bottlenecks..."
               aria-invalid={!!errors.message}
-              aria-describedby={errors.message ? "message-error" : undefined}
-              className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#071327] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-[#2563EB] resize-y ${
-                errors.message ? "border-red-400 bg-red-50/20" : "border-[#E2E8F0]"
+              className={`w-full px-3.5 py-2.5 rounded-xl border text-sm text-slate-900 dark:text-white bg-slate-50/50 dark:bg-slate-900/60 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none ${
+                errors.message ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-white/10"
               }`}
             />
             {errors.message && (
-              <p id="message-error" className="mt-1 text-xs text-red-600">
+              <p className="mt-1 text-xs text-rose-500 font-mono">
                 {errors.message}
               </p>
             )}
           </div>
 
           {/* Submit Button */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <span className="text-xs text-[#64748B]">
-              Direct responses typically within 24-48 business hours.
-            </span>
-
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              disabled={status === "loading"}
-              className="w-full sm:w-auto"
-            >
-              {status === "loading" ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                  <span>Submitting...</span>
-                </>
-              ) : (
-                <>
-                  <span>Send Project Inquiry</span>
-                  <Send className="w-4 h-4 ml-1.5" />
-                </>
-              )}
-            </Button>
-          </div>
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-sm font-bold shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:pointer-events-none"
+          >
+            {status === "loading" ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Transmitting Specifications...</span>
+              </>
+            ) : (
+              <>
+                <span>Submit Technical Inquiry</span>
+                <Send className="w-4 h-4" />
+              </>
+            )}
+          </button>
         </form>
       )}
     </div>

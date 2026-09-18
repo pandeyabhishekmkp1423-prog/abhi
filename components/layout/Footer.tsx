@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, ArrowUp } from "lucide-react";
+import { Mail, ArrowUp, Activity, Terminal } from "lucide-react";
 import { Container } from "./Container";
 
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -38,13 +40,46 @@ const LinkedinIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 );
 
 export const Footer: React.FC = () => {
-  const currentYear = 2026;
+  const currentYear = new Date().getFullYear();
+  const [time, setTime] = useState<string>("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString("en-US", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <footer className="bg-white border-t border-[#E2E8F0] py-12 lg:py-16 text-[#64748B]">
+    <footer className="bg-white dark:bg-[#07090E] border-t border-slate-200/80 dark:border-white/10 py-12 lg:py-16 text-slate-500 dark:text-slate-400 transition-colors">
       <Container>
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 pb-8 border-b border-[#E2E8F0]">
-          {/* Identity & Positioning with Signature Brand Mark */}
+        {/* Status and Information Strip */}
+        <div className="mb-10 p-4 rounded-xl bg-neutral-50 dark:bg-[#0C1017] border border-neutral-200/80 dark:border-neutral-800 flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Available for select projects</span>
+            </span>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
+            <span className="text-neutral-600 dark:text-neutral-400">
+              Lucknow, India (UTC+5:30)
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3 text-neutral-500 dark:text-neutral-400">
+            <span>Local Time: {time || "00:00:00"}</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 pb-8 border-b border-slate-200/80 dark:border-white/10">
+          {/* Identity & Signature */}
           <div className="max-w-md">
             <Link
               href="/"
@@ -55,23 +90,23 @@ export const Footer: React.FC = () => {
                   src="/images/signature-transparent.png"
                   alt="Abhishek Pandey"
                   fill
-                  className="object-contain object-left"
+                  className="object-contain object-left dark:invert dark:brightness-200 transition-all"
                 />
               </div>
             </Link>
-            <p className="mt-2 text-sm text-[#475569] leading-relaxed">
-              Full-Stack Developer &amp; Digital Product Builder. Designing and engineering production-grade web systems, business platforms, and digital architectures.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              Full-Stack Architect &amp; Digital Product Builder. Designing and engineering production-grade web systems, business platforms, and relational architectures.
             </p>
           </div>
 
           {/* Social Links & Direct Mail */}
-          <div className="flex flex-wrap items-center gap-4 text-sm">
+          <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
             <a
               href="mailto:contact@abhishekpandey.dev"
-              className="inline-flex items-center gap-1.5 text-[#475569] hover:text-[#2563EB] transition-colors py-1 px-2.5 rounded-md hover:bg-slate-50 border border-slate-200"
+              className="inline-flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 px-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-indigo-400 transition-all"
               aria-label="Send email"
             >
-              <Mail className="w-4 h-4 text-[#2563EB]" />
+              <Mail className="w-3.5 h-3.5 text-indigo-500" />
               <span>contact@abhishekpandey.dev</span>
             </a>
 
@@ -79,7 +114,7 @@ export const Footer: React.FC = () => {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-[#475569] hover:text-[#071327] hover:bg-slate-100 rounded-md transition-colors"
+              className="p-2 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-indigo-400 transition-all"
               aria-label="GitHub Profile"
             >
               <GithubIcon className="w-4 h-4" />
@@ -89,7 +124,7 @@ export const Footer: React.FC = () => {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-[#475569] hover:text-[#071327] hover:bg-slate-100 rounded-md transition-colors"
+              className="p-2 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-indigo-400 transition-all"
               aria-label="LinkedIn Profile"
             >
               <LinkedinIcon className="w-4 h-4" />
@@ -98,21 +133,20 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Sub-bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#94A3B8]">
-          <div className="flex items-center gap-6">
-            <span>&copy; {currentYear} Abhishek Pandey. All rights reserved.</span>
-            <span className="hidden sm:inline-block">·</span>
-            <span className="hidden sm:inline-block">Built with Next.js, TypeScript &amp; Tailwind CSS</span>
-          </div>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+          <p className="text-slate-500 dark:text-slate-500">
+            &copy; {currentYear} Abhishek Pandey. All rights reserved. Crafted with surgical precision.
+          </p>
 
-          <a
-            href="#"
-            className="inline-flex items-center gap-1 text-[#64748B] hover:text-[#2563EB] transition-colors"
-            aria-label="Scroll to top of page"
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="flex items-center gap-1.5 text-slate-500 hover:text-indigo-600 dark:hover:text-white transition-colors"
+            aria-label="Scroll back to top of page"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />
-          </a>
+          </button>
         </div>
       </Container>
     </footer>

@@ -4,14 +4,15 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
   ArrowUpRight,
-  Search,
-  LayoutGrid,
-  Code2
+  Moon,
+  Sun
 } from "lucide-react";
+import { useTheme } from "../providers/ThemeProvider";
 
 interface NavItem {
   label: string;
@@ -21,33 +22,52 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "Home", id: "hero", href: "/#hero" },
-  { label: "Capabilities", id: "services", href: "/#services" },
   { label: "Portfolio", id: "work", href: "/#work" },
-  { label: "Tech Stack", id: "stack", href: "/#stack" },
-  { label: "Process", id: "process", href: "/#process" },
+  { label: "Toolchains", id: "stack", href: "/#stack" },
+  { label: "Principles", id: "principles", href: "/#principles" },
   { label: "Contact", id: "contact", href: "/#contact" }
 ];
+
+const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [hoveredTab, setHoveredTab] = useState<string | null>(null);
   const pathname = usePathname();
   const drawerRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const { resolvedTheme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      // 1. Calculate overall page scroll progress from 0% to 100%
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 20);
+
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0) {
-        const progress = Math.min(Math.max(window.scrollY / docHeight, 0), 1);
+        const progress = Math.min(Math.max(scrollY / docHeight, 0), 1);
         setScrollProgress(progress);
       }
 
-      // 2. Track currently visible section for navigation highlighting
-      const sectionIds = ["hero", "services", "work", "stack", "process", "contact"];
-      const scrollPos = window.scrollY + 200;
+      const sectionIds = ["hero", "work", "stack", "principles", "contact"];
+      const scrollPos = scrollY + 220;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i]);
@@ -94,175 +114,250 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-slate-200/70 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between">
-        
-        {/* Brand Logo: Clean signature with proportional navbar scale */}
-        <Link
-          href="/"
-          className="group flex items-center transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-lg py-1 px-1 shrink-0"
-          aria-label="Abhishek Pandey Portfolio Home"
-        >
-          <div className="relative h-10 sm:h-11 w-44 sm:w-52 flex items-center">
-            <Image
-              src="/images/signature-transparent.png"
-              alt="Abhishek Pandey Signature"
-              fill
-              className="object-contain object-left"
-              priority
-            />
-          </div>
-        </Link>
-
-        {/* Center Navigation: Open horizontal layout, no grey bubble, no text wrapping */}
-        <nav
-          className="hidden lg:flex items-center gap-7 xl:gap-8"
-          aria-label="Main Navigation"
-        >
-          {navItems.map((item) => {
-            const isActive = activeSection === item.id;
-            return (
-              <Link
-                key={item.label}
-                href={getHref(item.href)}
-                className={`whitespace-nowrap text-sm font-medium transition-colors relative py-1 ${
-                  isActive
-                    ? "text-violet-600 font-semibold"
-                    : "text-slate-600 hover:text-violet-600"
-                }`}
-              >
-                <span>{item.label}</span>
-                {isActive && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-violet-600 rounded-full" />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Right Actions: Search, Stack status, Inquiries, Clean Violet CTA button, App switcher */}
-        <div className="hidden md:flex items-center gap-3 sm:gap-4">
-          {/* Quick Search trigger */}
-          <button
-            type="button"
-            onClick={() => {
-              const input = document.querySelector('input[type="text"]') as HTMLInputElement;
-              input?.focus();
-            }}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-slate-500 hover:text-violet-600 hover:bg-violet-50 transition-colors"
-            aria-label="Search site"
-          >
-            <Search className="w-4 h-4" />
-          </button>
-
-          {/* Quick Stack / Terminal trigger */}
-          <Link
-            href={getHref("/#stack")}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-slate-500 hover:text-violet-600 hover:bg-violet-50 transition-colors relative"
-            aria-label="Active tech stack"
-          >
-            <Code2 className="w-4 h-4" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white" />
-          </Link>
-
-          {/* Inquiries text link */}
-          <Link
-            href={getHref("/#contact")}
-            className="text-xs sm:text-sm font-medium text-slate-600 hover:text-violet-600 transition-colors px-1"
-          >
-            Inquiries
-          </Link>
-
-          {/* Clean, Sharp Violet CTA Button matching reference 'Join AI' */}
-          <Link
-            href={getHref("/#contact")}
-            className="btn-glow px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-sm hover:shadow-md hover:shadow-violet-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
-          >
-            Start a Project
-          </Link>
-
-          {/* 4-dot Grid App Icon */}
-          <Link
-            href={getHref("/#work")}
-            className="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-500 hover:text-violet-600 hover:border-violet-300 hover:bg-violet-50/50 transition-all"
-            aria-label="View all apps"
-          >
-            <LayoutGrid className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* Mobile Menu Actions */}
-        <div className="flex lg:hidden items-center gap-2">
-          <Link
-            href={getHref("/#contact")}
-            className="px-3.5 py-1.5 rounded-full bg-violet-600 text-white text-xs font-bold shadow-sm"
-          >
-            Contact
-          </Link>
-          <button
-            ref={menuButtonRef}
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 text-[#0B0F19] hover:text-violet-600 rounded-lg hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav-menu"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Reading Progress Bar running ONLY along the bottom edge of the sticky header */}
-      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-slate-100 overflow-hidden" aria-hidden="true">
+    <>
+      {/* Global Top Hairline Scroll Progress Gradient Tracker */}
+      <div className="fixed top-0 inset-x-0 h-[2px] z-[60] pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-violet-600 to-indigo-600 transition-all duration-150 ease-out"
+          className="h-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-amber-400 shadow-[0_0_8px_rgba(56,189,248,0.6)] transition-all duration-100 ease-out"
           style={{ width: `${scrollProgress * 100}%` }}
         />
       </div>
 
-      {/* Mobile Dropdown Drawer */}
-      {mobileMenuOpen && (
+      {/* Header Container: Full transparent edge-to-edge at top, compact floating island dock when scrolled */}
+      <header
+        className={`fixed inset-x-0 z-50 pointer-events-none transition-all duration-300 ${
+          isScrolled
+            ? "top-3.5 sm:top-5 flex justify-center px-3 sm:px-6"
+            : "top-0 w-full px-6 sm:px-12 lg:px-16 pt-5 sm:pt-6 pb-4 bg-gradient-to-b from-neutral-950/60 via-neutral-950/20 to-transparent"
+        }`}
+      >
         <div
-          id="mobile-nav-menu"
-          ref={drawerRef}
-          className="bg-white/98 backdrop-blur-2xl px-6 py-6 border-b border-slate-200/90 shadow-2xl z-40 lg:hidden flex flex-col gap-4 animate-in fade-in duration-200"
+          className={`pointer-events-auto relative flex items-center justify-between w-full transition-all duration-300 text-white select-none ${
+            isScrolled
+              ? "max-w-4xl px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neutral-950/85 backdrop-blur-2xl border border-white/15 shadow-[0_16px_48px_rgba(0,0,0,0.65),inset_0_1px_1px_rgba(255,255,255,0.15)]"
+              : "w-full bg-transparent border-transparent shadow-none"
+          }`}
         >
-          <nav className="flex flex-col gap-2 font-medium" aria-label="Mobile Navigation">
+          {/* Left: Brand Signature Logo */}
+          <div className="flex items-center shrink-0">
+            <Link
+              href="/"
+              className="group flex items-center transition-transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-full py-0.5"
+              aria-label="Abhishek Pandey Portfolio Home"
+            >
+              <div
+                className={`relative transition-all duration-300 flex items-center ${
+                  isScrolled
+                    ? "h-7 sm:h-7.5 w-26 sm:w-30"
+                    : "h-10 sm:h-12 w-36 sm:w-44"
+                }`}
+              >
+                <Image
+                  src="/images/signature-white.png"
+                  alt="Abhishek Pandey"
+                  fill
+                  className="object-contain object-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_2px_16px_rgba(255,255,255,0.6)] transition-all duration-200"
+                  priority
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* Center: Segmented Navigation Bar with Fluid Sliding Pill */}
+          <nav
+            className={`hidden lg:flex items-center gap-0.5 p-1 rounded-full backdrop-blur-md transition-all duration-300 ${
+              isScrolled
+                ? "bg-white/[0.06] border border-white/[0.08]"
+                : "bg-white/[0.08] border border-white/15 shadow-sm"
+            }`}
+            aria-label="Main Navigation"
+          >
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <Link
                   key={item.label}
                   href={getHref(item.href)}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`py-2.5 px-3 rounded-lg transition-colors flex items-center justify-between text-sm ${
-                    isActive
-                      ? "bg-violet-50 text-violet-700 font-bold"
-                      : "text-[#0B0F19] hover:bg-violet-50 hover:text-violet-600"
+                  onMouseEnter={() => setHoveredTab(item.id)}
+                  onMouseLeave={() => setHoveredTab(null)}
+                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors select-none ${
+                    isActive ? "text-neutral-950 font-semibold" : "text-white/80 hover:text-white"
                   }`}
                 >
-                  <span>{item.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-slate-400" />
+                  {/* Sliding Active Pill */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="navbarActiveIndicator"
+                      className="absolute inset-0 rounded-full bg-white shadow-md"
+                      transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                    />
+                  )}
+                  {/* Hover Pill for inactive tabs */}
+                  {!isActive && hoveredTab === item.id && (
+                    <motion.span
+                      layoutId="navbarHoverIndicator"
+                      className="absolute inset-0 rounded-full bg-white/10"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
                 </Link>
               );
             })}
           </nav>
 
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+          {/* Right: GitHub Profile, Theme Toggle, and White "Let's Talk" CTA */}
+          <div className="hidden sm:flex items-center gap-2">
+            {/* GitHub Profile Icon Link */}
+            <a
+              href="https://github.com/pandeyabhishekmkp1423-prog"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-full flex items-center justify-center text-white/80 hover:text-white bg-white/[0.08] hover:bg-white/20 border border-white/12 hover:border-white/25 transition-all active:scale-95 shadow-sm"
+              aria-label="GitHub Profile"
+              title="Abhishek Pandey on GitHub"
+            >
+              <GithubIcon className="w-4 h-4" />
+            </a>
+
+            {/* Theme Toggle Button */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-full flex items-center justify-center text-white/80 hover:text-white bg-white/[0.08] hover:bg-white/20 border border-white/12 hover:border-white/25 transition-all active:scale-95 shadow-sm"
+              aria-label="Toggle Dark/Light Mode"
+              title={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
+            >
+              {resolvedTheme === "dark" ? (
+                <Sun className="w-3.5 h-3.5 text-amber-300 hover:rotate-45 transition-transform" />
+              ) : (
+                <Moon className="w-3.5 h-3.5 text-indigo-300 hover:-rotate-12 transition-transform" />
+              )}
+            </button>
+
+            {/* Solid White CTA Button */}
             <Link
               href={getHref("/#contact")}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-2.5 text-center rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-xs shadow-md shadow-violet-500/30"
+              className="relative group overflow-hidden px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-neutral-100 text-neutral-950 text-xs sm:text-sm font-semibold shadow-[0_2px_14px_rgba(255,255,255,0.25)] hover:shadow-[0_4px_20px_rgba(255,255,255,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
-              Start a Project
+              <span className="relative z-10 flex items-center gap-1.5">
+                <span>Let&apos;s Talk</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-700 group-hover:text-neutral-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </span>
             </Link>
-            <div className="text-center text-[11px] text-[#64748B]">
-              Available for full-stack engineering &amp; digital systems.
-            </div>
+          </div>
+
+          {/* Mobile Right Controls: GitHub, Theme Toggle, and Menu Toggle */}
+          <div className="flex lg:hidden items-center gap-1.5">
+            <a
+              href="https://github.com/pandeyabhishekmkp1423-prog"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-white/80 hover:text-white rounded-full bg-white/[0.08] hover:bg-white/20 border border-white/12 active:scale-95 transition-all"
+              aria-label="GitHub Profile"
+            >
+              <GithubIcon className="w-4 h-4" />
+            </a>
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="p-2 text-white/80 hover:text-white rounded-full bg-white/[0.08] hover:bg-white/20 border border-white/12 active:scale-95 transition-all"
+              aria-label="Toggle Theme"
+            >
+              {resolvedTheme === "dark" ? (
+                <Sun className="w-4 h-4 text-amber-300" />
+              ) : (
+                <Moon className="w-4 h-4 text-indigo-300" />
+              )}
+            </button>
+
+            <button
+              ref={menuButtonRef}
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-white hover:text-white/80 rounded-full bg-white/[0.08] hover:bg-white/20 border border-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 active:scale-95 transition-all"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav-menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
-      )}
-    </header>
+      </header>
+
+      {/* Floating Mobile Navigation Drawer & Frosted Backdrop */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 flex flex-col justify-start pt-20 px-4 pointer-events-auto">
+            {/* Backdrop Click to Dismiss */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-md -z-10"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-hidden="true"
+            />
+
+            <motion.div
+              id="mobile-nav-menu"
+              ref={drawerRef}
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-sm mx-auto rounded-3xl bg-neutral-950/95 backdrop-blur-2xl p-5 border border-white/15 shadow-2xl flex flex-col gap-4 text-white"
+            >
+              <nav className="flex flex-col gap-1 font-medium" aria-label="Mobile Navigation">
+                {navItems.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <Link
+                      key={item.label}
+                      href={getHref(item.href)}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`py-2.5 px-3.5 rounded-xl transition-colors flex items-center justify-between text-sm ${
+                        isActive
+                          ? "bg-white text-neutral-950 font-bold"
+                          : "text-white/80 hover:text-white hover:bg-white/10"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <ArrowUpRight className="w-4 h-4 opacity-50" />
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+                <Link
+                  href={getHref("/#contact")}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-2.5 text-center rounded-full bg-white hover:bg-neutral-100 text-neutral-950 font-bold text-xs shadow-md transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <span>Let&apos;s Talk</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-700" />
+                </Link>
+
+                <a
+                  href="https://github.com/pandeyabhishekmkp1423-prog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-2 text-center rounded-full bg-white/10 hover:bg-white/15 text-white font-medium text-xs border border-white/10 transition-colors flex items-center justify-center gap-2"
+                >
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  <span>GitHub Profile</span>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
+

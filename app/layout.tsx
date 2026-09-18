@@ -3,6 +3,8 @@ import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,24 +21,20 @@ const sora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://abhishekpandey.dev"),
   title: {
-    default: "Abhishek Pandey — Full-Stack Developer & Digital Product Builder",
+    default: "Abhishek Pandey — Full-Stack Architect & Digital Product Builder",
     template: "%s | Abhishek Pandey"
   },
   description: "Engineering real digital products, enterprise management systems (ERP/CRM/LMS), e-commerce platforms, and robust API/database architectures from requirement to deployment.",
   keywords: [
     "Full Stack Developer",
-    "Web Developer",
-    "Digital Product Builder",
+    "Software Engineer",
+    "Systems Architect",
     "Next.js Developer",
     "React Developer",
+    "TypeScript",
+    "PostgreSQL",
     "Laravel Developer",
-    "Node.js Developer",
-    "Custom Web Applications",
     "ERP Development",
-    "CRM Development",
-    "LMS Development",
-    "E-Commerce Development",
-    "API Integration",
     "Abhishek Pandey"
   ],
   authors: [{ name: "Abhishek Pandey" }],
@@ -49,12 +47,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://abhishekpandey.dev",
     siteName: "Abhishek Pandey — Portfolio",
-    title: "Abhishek Pandey — Full-Stack Developer & Digital Product Builder",
+    title: "Abhishek Pandey — Full-Stack Architect & Digital Product Builder",
     description: "Building production-grade web systems, business platforms, and e-commerce applications from requirement to production deployment."
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abhishek Pandey — Full-Stack Developer & Digital Product Builder",
+    title: "Abhishek Pandey — Full-Stack Architect & Digital Product Builder",
     description: "Building production-grade web systems, business platforms, and e-commerce applications from requirement to production deployment."
   },
   robots: {
@@ -68,12 +66,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // JSON-LD Structured Data for Person and WebSite
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Abhishek Pandey",
-    jobTitle: "Full-Stack Developer & Digital Product Builder",
+    jobTitle: "Full-Stack Architect & Digital Product Builder",
     url: "https://abhishekpandey.dev",
     sameAs: [
       "https://github.com",
@@ -85,12 +82,10 @@ export default function RootLayout({
       "React",
       "TypeScript",
       "Node.js",
-      "Laravel",
-      "PHP",
-      "MySQL",
       "PostgreSQL",
-      "ERP Systems",
-      "E-Commerce"
+      "Laravel",
+      "Distributed Systems",
+      "ACID Architecture"
     ]
   };
 
@@ -105,8 +100,29 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${sora.variable} h-full antialiased scroll-smooth`}
+      suppressHydrationWarning
     >
       <head>
+        {/* Inline script to prevent FOUC for dark mode */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (saved === 'dark' || (!saved && prefersDark) || !saved) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.style.colorScheme = 'dark';
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
+                  }
+                } catch(e) {}
+              })();
+            `
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
@@ -116,12 +132,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-[#111827] selection:bg-blue-100 selection:text-blue-900">
-        <Navbar />
-        <div className="flex-1 flex flex-col">
-          {children}
-        </div>
-        <Footer />
+      <body className="min-h-full flex flex-col bg-white dark:bg-[#07090E] text-slate-900 dark:text-slate-100 selection:bg-indigo-500 selection:text-white transition-colors duration-200">
+        <ThemeProvider>
+          <CommandPalette />
+          <Navbar />
+          <div className="flex-1 flex flex-col">
+            {children}
+          </div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

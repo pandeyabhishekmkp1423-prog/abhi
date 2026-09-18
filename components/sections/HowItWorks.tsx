@@ -1,173 +1,182 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Code2, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { ArrowUpRight, Code2, ShieldCheck, Sparkles, Zap, CheckCircle2, Terminal } from "lucide-react";
 import { Container } from "../layout/Container";
 
 export const HowItWorks: React.FC = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
+  const steps = [
+    {
+      num: "01",
+      title: "Architecture & Schema Modeling",
+      description: "Analyze business workflows, construct strict foreign key relationships, normalize SQL tables, and audit for zero financial or state discrepancies.",
+      tag: "Relational Modeling"
+    },
+    {
+      num: "02",
+      title: "High-Throughput Full-Stack Core",
+      description: "Develop server components, authenticated REST endpoints, role-based access gates (RBAC), and streaming SSR for sub-second page rendering.",
+      tag: "Streaming SSR"
+    },
+    {
+      num: "03",
+      title: "Deterministic Validation & QA",
+      description: "Rigorous end-to-end testing, responsive cross-device validation, WCAG 2.1 accessibility auditing, and Core Web Vitals profiling.",
+      tag: "100% Type Safety"
+    },
+    {
+      num: "04",
+      title: "Zero-Downtime Cloud Deployment",
+      description: "Automated Git CI/CD pipelines, SSL/TLS certificates, CDN edge configuration, and continuous uptime monitoring.",
+      tag: "Production Delivery"
+    }
+  ];
+
   return (
-    <section className="py-24 lg:py-32 bg-[#FAF8FF] relative overflow-hidden">
+    <section className="py-20 lg:py-28 bg-slate-50/50 dark:bg-[#07090E] relative overflow-hidden transition-colors border-t border-slate-200/80 dark:border-white/10">
       {/* Soft background ambient glow */}
       <div
-        className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-violet-400/10 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-0 right-10 w-[450px] h-[450px] bg-indigo-400/10 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute bottom-0 right-10 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10"
         aria-hidden="true"
       />
 
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Overlapping Visual Mockup Cards (matching reference image) */}
+          {/* Left Column: Overlapping Visual Mockup Cards */}
           <div className="lg:col-span-6 relative">
-            <div className="relative mx-auto max-w-[520px] h-[480px] sm:h-[540px]">
-              {/* Decorative radial pulse behind */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 via-purple-400/15 to-indigo-500/10 rounded-3xl blur-2xl -z-10 transform scale-95" />
+            <div className="relative mx-auto max-w-[520px] h-[440px] sm:h-[480px]">
+              {/* Radial pulse behind */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-violet-500/15 to-cyan-500/10 rounded-3xl blur-2xl -z-10 transform scale-95" />
 
-              {/* Main Prominent Card: ScentRun / AI Storefront */}
-              <div className="absolute top-0 right-0 w-[78%] sm:w-[74%] h-[360px] sm:h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-white/80 shadow-[0_20px_50px_rgba(139,92,246,0.18)] bg-white z-10 transition-transform duration-500 hover:scale-[1.02]">
+              {/* Main Card: Scentrun Fragrances */}
+              <div className="absolute top-0 right-0 w-[80%] sm:w-[76%] h-[320px] sm:h-[350px] rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 shadow-2xl bg-white dark:bg-slate-900 z-10 transition-transform duration-500 hover:scale-[1.02]">
                 <Image
                   src="/images/projects/scentrun.jpg"
                   alt="ScentRun E-Commerce Architecture"
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-violet-500/80 backdrop-blur-md text-[10px] font-semibold tracking-wider uppercase mb-1">
-                    <Sparkles className="w-3 h-3 text-violet-200" />
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/80 backdrop-blur-md text-[10px] font-mono font-semibold tracking-wider uppercase mb-1">
+                    <Sparkles className="w-3 h-3 text-cyan-300" />
                     Interactive Commerce
                   </div>
-                  <h4 className="font-heading font-bold text-base sm:text-lg">ScentRun Fragrances</h4>
-                  <p className="text-xs text-slate-200 line-clamp-1">Tailwind 4, Razorpay Gateway & sub-100ms filter engine</p>
+                  <h4 className="font-heading font-bold text-sm sm:text-base">Scentrun Fragrances</h4>
+                  <p className="text-xs text-slate-300 line-clamp-1">Faceted note taxonomy &amp; sub-100ms URL search engine</p>
                 </div>
               </div>
 
-              {/* Secondary Overlapping Card: MetaWaves Studio */}
-              <div className="absolute bottom-0 left-0 w-[68%] sm:w-[65%] h-[260px] sm:h-[300px] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-white/80 shadow-[0_25px_60px_rgba(79,70,229,0.22)] bg-slate-900 z-20 transition-transform duration-500 hover:scale-[1.03]">
+              {/* Secondary Overlapping Card: MetaWaves LMS */}
+              <div className="absolute bottom-0 left-0 w-[70%] sm:w-[66%] h-[240px] sm:h-[270px] rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 shadow-2xl bg-slate-900 z-20 transition-transform duration-500 hover:scale-[1.03]">
                 <Image
                   src="/images/projects/metawaves.jpg"
-                  alt="MetaWaves Studio Platform"
+                  alt="MetaWaves LMS Platform"
                   fill
                   className="object-cover object-left-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-indigo-500/80 backdrop-blur-md text-[10px] font-semibold tracking-wider uppercase mb-1">
-                    <Zap className="w-3 h-3 text-amber-300" />
-                    Web3 & Media
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 text-white">
+                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-violet-500/80 backdrop-blur-md text-[9px] font-mono font-semibold tracking-wider uppercase mb-1">
+                    <Zap className="w-2.5 h-2.5 text-amber-300" />
+                    Multi-Tenant EdTech
                   </div>
-                  <h4 className="font-heading font-bold text-sm sm:text-base">MetaWaves Studio</h4>
-                  <p className="text-xs text-slate-300 line-clamp-1">Full-stack React & Next.js portal</p>
+                  <h4 className="font-heading font-bold text-xs sm:text-sm">MetaWaves LMS</h4>
+                  <p className="text-[11px] text-slate-300 line-clamp-1">PostgreSQL normalized course progress tracker</p>
                 </div>
               </div>
 
-              {/* Floating Performance Pill 1 */}
-              <div className="absolute top-8 left-2 sm:-left-4 z-30 bg-white/90 backdrop-blur-xl px-4 py-2.5 rounded-2xl border border-violet-100 shadow-[0_10px_25px_rgba(139,92,246,0.15)] flex items-center gap-2.5 animate-bounce-subtle">
-                <div className="w-8 h-8 rounded-xl bg-violet-100 flex items-center justify-center text-violet-600">
-                  <Code2 className="w-4 h-4" />
+              {/* Floating Performance Badge 1 */}
+              <div className="absolute top-6 left-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl px-3.5 py-2 rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-xl flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                  <Code2 className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-bold text-slate-900 leading-none">100% Type-Safe</div>
-                  <div className="text-[10px] text-slate-500 font-mono mt-0.5">TypeScript & Next.js</div>
+                  <div className="text-[11px] font-bold text-slate-900 dark:text-white leading-none">100% Type-Safe</div>
+                  <div className="text-[9px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">TypeScript Strict</div>
                 </div>
               </div>
 
-              {/* Floating Performance Pill 2 */}
-              <div className="absolute -bottom-3 right-4 sm:right-8 z-30 bg-white/90 backdrop-blur-xl px-4 py-2.5 rounded-2xl border border-indigo-100 shadow-[0_10px_25px_rgba(99,102,241,0.18)] flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
-                  <ShieldCheck className="w-4 h-4" />
+              {/* Floating Performance Badge 2 */}
+              <div className="absolute -bottom-2 right-4 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl px-3.5 py-2 rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-xl flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                  <ShieldCheck className="w-3.5 h-3.5" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-bold text-slate-900 leading-none">99.98% Reliability</div>
-                  <div className="text-[10px] text-emerald-600 font-medium mt-0.5">Zero Downtime CD</div>
+                  <div className="text-[11px] font-bold text-slate-900 dark:text-white leading-none">99.98% Uptime</div>
+                  <div className="text-[9px] text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">ACID Compliance</div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Step-by-Step Execution Guide (matching "How to generate AI images") */}
+          {/* Right Column: Step-by-Step Execution Guide */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-100 border border-violet-200/80 text-violet-700 text-xs font-bold tracking-wider uppercase">
-              <span className="w-2 h-2 rounded-full bg-violet-600 animate-pulse" />
-              Engineering Execution Process
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-500/30 text-indigo-600 dark:text-indigo-400 text-xs font-mono font-bold tracking-wider uppercase mb-3">
+                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                SYSTEMS BLUEPRINT
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+                How we build <br className="hidden sm:block" />
+                <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-500 dark:from-indigo-400 dark:via-violet-300 dark:to-cyan-400 bg-clip-text text-transparent">
+                  production software.
+                </span>
+              </h2>
+
+              <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                A predictable engineering lifecycle designed to eliminate architectural drift, guarantee data integrity, and launch scalable systems without surprises.
+              </p>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[#0B0F19] tracking-tight leading-[1.15]">
-              How we build <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                production systems
-              </span>
-            </h2>
+            {/* Interactive Step Items */}
+            <div className="space-y-3 pt-2">
+              {steps.map((step, idx) => {
+                const isSelected = activeStep === idx;
+                return (
+                  <div
+                    key={step.num}
+                    onClick={() => setActiveStep(idx)}
+                    className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-white dark:bg-[#0E121B] border-indigo-500/50 shadow-lg shadow-indigo-500/5"
+                        : "bg-white/40 dark:bg-white/5 border-slate-200/70 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/10"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-lg ${
+                          isSelected
+                            ? "bg-indigo-600 text-white"
+                            : "bg-slate-100 dark:bg-white/10 text-slate-500 dark:text-slate-400"
+                        }`}>
+                          {step.num}
+                        </span>
+                        <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                          {step.title}
+                        </h4>
+                      </div>
 
-            <p className="text-sm sm:text-base text-[#475569] leading-relaxed max-w-xl">
-              From architectural blueprint to deployed microservices, our methodology eliminates guesswork and ensures enterprise-grade reliability at every phase of delivery.
-            </p>
+                      <span className="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-semibold px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 shrink-0">
+                        {step.tag}
+                      </span>
+                    </div>
 
-            {/* 3 Step List matching reference */}
-            <div className="space-y-6 pt-2">
-              {/* Step 1 */}
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/70 shadow-xs hover:border-violet-300 hover:shadow-md transition-all group">
-                <div className="w-11 h-11 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600 font-heading font-bold text-base shrink-0 group-hover:bg-violet-600 group-hover:text-white transition-colors">
-                  01
-                </div>
-                <div className="space-y-1">
-                  <h3 className="font-heading font-bold text-base sm:text-lg text-[#0B0F19] group-hover:text-violet-600 transition-colors">
-                    Architectural Blueprint &amp; Data Contracts
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
-                    Map schemas, authorization rules, and system dependencies before writing code. We define precise OpenAPI contracts and database models.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/70 shadow-xs hover:border-indigo-300 hover:shadow-md transition-all group">
-                <div className="w-11 h-11 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-heading font-bold text-base shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                  02
-                </div>
-                <div className="space-y-1">
-                  <h3 className="font-heading font-bold text-base sm:text-lg text-[#0B0F19] group-hover:text-indigo-600 transition-colors">
-                    Iterative Full-Stack Construction
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
-                    Rapid modular implementation with Next.js App Router, Tailwind, Node.js microservices, and reactive caching with instant feedback loops.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/70 shadow-xs hover:border-purple-300 hover:shadow-md transition-all group">
-                <div className="w-11 h-11 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600 font-heading font-bold text-base shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                  03
-                </div>
-                <div className="space-y-1">
-                  <h3 className="font-heading font-bold text-base sm:text-lg text-[#0B0F19] group-hover:text-purple-600 transition-colors">
-                    Automated Verification &amp; Production Launch
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
-                    End-to-end integration tests, load profiling, zero-downtime CI/CD deployment, and 24/7 observability with real-time error tracking.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Action CTA */}
-            <div className="pt-2 flex items-center gap-4">
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-medium text-sm shadow-[0_10px_25px_rgba(139,92,246,0.35)] hover:shadow-[0_12px_30px_rgba(139,92,246,0.45)] hover:scale-105 active:scale-95 transition-all"
-              >
-                <span>Initiate Your Build</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/#work"
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-violet-600 transition-colors py-2 px-3"
-              >
-                View Live Case Studies &rarr;
-              </Link>
+                    <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed pl-9">
+                      {step.description}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
